@@ -1,15 +1,14 @@
-﻿using System;
+﻿using CDR.Register.Repository.Infrastructure;
+using FluentAssertions;
+using FluentAssertions.Execution;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using CDR.Register.Repository.Infrastructure;
-using FluentAssertions;
-using FluentAssertions.Execution;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using Xunit;
-using Microsoft.Extensions.Configuration;
 
 #nullable enable
 
@@ -22,7 +21,7 @@ namespace CDR.Register.IntegrationTests.API.Status
     {
         private string GetExpectedSoftwareProductStatus()
         {
-            using var dbContext = new RegisterDatabaseContext(new DbContextOptionsBuilder<RegisterDatabaseContext>().UseSqlite(Configuration.GetConnectionString("DefaultConnection")).Options);
+            using var dbContext = new RegisterDatabaseContext(new DbContextOptionsBuilder<RegisterDatabaseContext>().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).Options);
 
             var expectedSoftwareProductsStatus = new
             {

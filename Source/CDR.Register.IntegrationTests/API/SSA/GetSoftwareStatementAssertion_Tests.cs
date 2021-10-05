@@ -131,9 +131,7 @@ namespace CDR.Register.IntegrationTests.API.SSA
         public async Task Test_AC01_AC02_AC03(int? XV, int expectedXV)
         {
             // Arrange - Get SoftwareProduct
-            using var dbContext = new RegisterDatabaseContext(new DbContextOptionsBuilder<RegisterDatabaseContext>()
-                .UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
-                .Options);
+            using var dbContext = new RegisterDatabaseContext(new DbContextOptionsBuilder<RegisterDatabaseContext>().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).Options);
             var softwareProduct = dbContext.SoftwareProducts.AsNoTracking()
                     .Include(sp => sp.Brand)
                     .Where(sp => sp.SoftwareProductId == new Guid(SOFTWAREPRODUCTID))

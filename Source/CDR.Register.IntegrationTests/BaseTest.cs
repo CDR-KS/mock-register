@@ -1,20 +1,17 @@
-﻿using System;
+﻿using CDR.Register.IntegrationTests.Extensions;
+using CDR.Register.IntegrationTests.Fixtures;
+using FluentAssertions;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading.Tasks;
-using CDR.Register.IntegrationTests.Extensions;
-using CDR.Register.IntegrationTests.Fixtures;
-using CDR.Register.IntegrationTests.Infrastructure;
-using FluentAssertions;
-using Microsoft.Data.Sqlite;
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using Xunit;
 
 #nullable enable
@@ -160,10 +157,10 @@ namespace CDR.Register.IntegrationTests
         /// </summary>
         public int GetSoftwareProductStatusId(string softwareProductId)
         {
-            using var connection = new SqliteConnection(Configuration.GetConnectionString("DefaultConnection"));
+            using var connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"));
             connection.Open();
 
-            using var selectCommand = new SqliteCommand("select statusid from softwareproduct where softwareproductid = @softwareproductid", connection);
+            using var selectCommand = new SqlCommand("select statusid from softwareproduct where softwareproductid = @softwareproductid", connection);
             selectCommand.Parameters.AddWithValue("@softwareproductid", softwareProductId);
 
             return selectCommand.ExecuteScalarInt32();
@@ -174,17 +171,17 @@ namespace CDR.Register.IntegrationTests
         /// </summary>
         public void SetSoftwareProductStatusId(string softwareProductId, int statusId)
         {
-            using var connection = new SqliteConnection(Configuration.GetConnectionString("DefaultConnection"));
+            using var connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"));
             connection.Open();
 
             // Update status
-            using var updateCommand = new SqliteCommand("update softwareproduct set statusid = @statusid where softwareproductid = @softwareproductid", connection);
+            using var updateCommand = new SqlCommand("update softwareproduct set statusid = @statusid where softwareproductid = @softwareproductid", connection);
             updateCommand.Parameters.AddWithValue("@softwareproductid", softwareProductId);
             updateCommand.Parameters.AddWithValue("@statusid", statusId);
             updateCommand.ExecuteNonQueryAsync();
 
             // Check status was updated
-            using var selectCommand = new SqliteCommand("select count(*) from softwareproduct where softwareproductid = @softwareproductid and statusid = @statusid", connection);
+            using var selectCommand = new SqlCommand("select count(*) from softwareproduct where softwareproductid = @softwareproductid and statusid = @statusid", connection);
             selectCommand.Parameters.AddWithValue("@softwareproductid", softwareProductId);
             selectCommand.Parameters.AddWithValue("@statusid", statusId);
             if (selectCommand.ExecuteScalarInt32() != 1)
@@ -198,10 +195,10 @@ namespace CDR.Register.IntegrationTests
         /// </summary>
         public int GetBrandStatusId(string brandId)
         {
-            using var connection = new SqliteConnection(Configuration.GetConnectionString("DefaultConnection"));
+            using var connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"));
             connection.Open();
 
-            using var selectCommand = new SqliteCommand("select brandstatusid from brand where brandid = @brandid", connection);
+            using var selectCommand = new SqlCommand("select brandstatusid from brand where brandid = @brandid", connection);
             selectCommand.Parameters.AddWithValue("@brandid", brandId);
 
             return selectCommand.ExecuteScalarInt32();
@@ -212,17 +209,17 @@ namespace CDR.Register.IntegrationTests
         /// </summary>
         public void SetBrandStatusId(string brandId, int statusId)
         {
-            using var connection = new SqliteConnection(Configuration.GetConnectionString("DefaultConnection"));
+            using var connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"));
             connection.Open();
 
             // Update status
-            using var updateCommand = new SqliteCommand("update brand set brandstatusid = @brandstatusid where brandid = @brandid", connection);
+            using var updateCommand = new SqlCommand("update brand set brandstatusid = @brandstatusid where brandid = @brandid", connection);
             updateCommand.Parameters.AddWithValue("@brandid", brandId);
             updateCommand.Parameters.AddWithValue("@brandstatusid", statusId);
             updateCommand.ExecuteNonQueryAsync();
 
             // Check status was updated
-            using var selectCommand = new SqliteCommand("select count(*) from brand where brandid = @brandid and brandstatusid = @brandstatusid", connection);
+            using var selectCommand = new SqlCommand("select count(*) from brand where brandid = @brandid and brandstatusid = @brandstatusid", connection);
             selectCommand.Parameters.AddWithValue("@brandid", brandId);
             selectCommand.Parameters.AddWithValue("@brandstatusid", statusId);
             if (selectCommand.ExecuteScalarInt32() != 1)
@@ -236,10 +233,10 @@ namespace CDR.Register.IntegrationTests
         /// </summary>
         public string GetParticipationId(string brandId)
         {
-            using var connection = new SqliteConnection(Configuration.GetConnectionString("DefaultConnection"));
+            using var connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"));
             connection.Open();
 
-            using var selectCommand = new SqliteCommand("select participationid from brand where brandid = @brandid", connection);
+            using var selectCommand = new SqlCommand("select participationid from brand where brandid = @brandid", connection);
             selectCommand.Parameters.AddWithValue("@brandid", brandId);
 
             return selectCommand.ExecuteScalarString(); // presumably brand only has single participation with legal entity, anyway if not this will throw
@@ -250,10 +247,10 @@ namespace CDR.Register.IntegrationTests
         /// </summary>
         public int GetParticipationStatusId(string participationId)
         {
-            using var connection = new SqliteConnection(Configuration.GetConnectionString("DefaultConnection"));
+            using var connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"));
             connection.Open();
 
-            using var selectCommand = new SqliteCommand("select statusid from participation where participationid = @participationid", connection);
+            using var selectCommand = new SqlCommand("select statusid from participation where participationid = @participationid", connection);
             selectCommand.Parameters.AddWithValue("@participationid", participationId);
 
             return selectCommand.ExecuteScalarInt32();
@@ -264,17 +261,17 @@ namespace CDR.Register.IntegrationTests
         /// </summary>
         public void SetParticipationStatusId(string participationId, int statusId)
         {
-            using var connection = new SqliteConnection(Configuration.GetConnectionString("DefaultConnection"));
+            using var connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection"));
             connection.Open();
 
             // Update status
-            using var updateCommand = new SqliteCommand("update participation set statusid = @statusid where participationid = @participationid", connection);
+            using var updateCommand = new SqlCommand("update participation set statusid = @statusid where participationid = @participationid", connection);
             updateCommand.Parameters.AddWithValue("@participationid", participationId);
             updateCommand.Parameters.AddWithValue("@statusid", statusId);
             updateCommand.ExecuteNonQueryAsync();
 
             // Check status was updated
-            using var selectCommand = new SqliteCommand("select count(*) from participation where participationid = @participationid and statusid = @statusid", connection);
+            using var selectCommand = new SqlCommand("select count(*) from participation where participationid = @participationid and statusid = @statusid", connection);
             selectCommand.Parameters.AddWithValue("@participationid", participationId);
             selectCommand.Parameters.AddWithValue("@statusid", statusId);
             if (selectCommand.ExecuteScalarInt32() != 1)
@@ -283,5 +280,4 @@ namespace CDR.Register.IntegrationTests
             };
         }
     }
-
 }

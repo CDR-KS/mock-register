@@ -1,14 +1,14 @@
+using Microsoft.Data.SqlClient;
 using System;
-using Microsoft.Data.Sqlite;
 
 namespace CDR.Register.IntegrationTests.Extensions
 {
-    static public class SqLiteExtensions
+    static public class SqlExtensions
     {
         /// <summary>
         /// Execute scalar command and return result as Int32. Throw error if no results or conversion error
         /// </summary>
-        static public Int32 ExecuteScalarInt32(this SqliteCommand command)
+        static public Int32 ExecuteScalarInt32(this SqlCommand command)
         {
             var res = command.ExecuteScalar();
 
@@ -23,7 +23,7 @@ namespace CDR.Register.IntegrationTests.Extensions
         /// <summary>
         /// Execute scalar command and return result as string. Throw error if no results or conversion error
         /// </summary>
-        static public string ExecuteScalarString(this SqliteCommand command)
+        static public string ExecuteScalarString(this SqlCommand command)
         {
             var res = command.ExecuteScalar();
 
