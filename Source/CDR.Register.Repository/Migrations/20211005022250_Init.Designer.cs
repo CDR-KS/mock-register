@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CDR.Register.Repository.Migrations
 {
     [DbContext(typeof(RegisterDatabaseContext))]
-    [Migration("20211005001632_Init")]
+    [Migration("20211005022250_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

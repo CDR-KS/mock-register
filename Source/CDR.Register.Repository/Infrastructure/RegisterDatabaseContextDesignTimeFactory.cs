@@ -18,14 +18,19 @@ namespace CDR.Register.Repository.Infrastructure
 
         public RegisterDatabaseContext CreateDbContext(string[] args)
         {
-            var connectionString = @"Server=(localdb)\\mssqllocaldb;Database=cdr-register;Trusted_Connection=True;MultipleActiveResultSets=True";
+            // Copy the connection string into here to create the Initial Migration using EFCore tools
+            // eg. Server=(localdb)\\MSSQLLocalDB;Database=cdr-register;Integrated Security=true
+            // From Package Manager Console > Select Repository as the start up project
+            // Delete any existing migrations and ContextModelSnapshots
+            // execute Add-Migration "Init"
+            // database will be created and seeded when solution is started
+            var connectionString = "";
             if (string.IsNullOrEmpty(connectionString))
             {
-                throw new InvalidOperationException("The connection string was not set in the 'MigrationConStr' environment variable.");
+                throw new InvalidOperationException("The connection string was not set in the CreateDbContext() method.");
             }
             var options = new DbContextOptionsBuilder<RegisterDatabaseContext>().UseSqlServer(connectionString).Options;
             return new RegisterDatabaseContext(options);
         }
     }
-
 }
