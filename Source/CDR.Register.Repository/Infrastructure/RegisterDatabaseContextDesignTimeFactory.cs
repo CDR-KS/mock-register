@@ -18,15 +18,12 @@ namespace CDR.Register.Repository.Infrastructure
 
         public RegisterDatabaseContext CreateDbContext(string[] args)
         {
-            var connectionString = Environment.GetEnvironmentVariable("MigrationConStr");
+            var connectionString = @"Server=(localdb)\\mssqllocaldb;Database=cdr-register;Trusted_Connection=True;MultipleActiveResultSets=True";
             if (string.IsNullOrEmpty(connectionString))
             {
                 throw new InvalidOperationException("The connection string was not set in the 'MigrationConStr' environment variable.");
             }
-
-            var options = new DbContextOptionsBuilder<RegisterDatabaseContext>()
-               .UseSqlite(connectionString)
-               .Options;
+            var options = new DbContextOptionsBuilder<RegisterDatabaseContext>().UseSqlServer(connectionString).Options;
             return new RegisterDatabaseContext(options);
         }
     }

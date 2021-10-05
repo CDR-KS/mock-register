@@ -113,8 +113,7 @@ namespace CDR.Register.IdentityServer
             services.AddSingleton<IRepositoryMapper, RepositoryMapper>();
             services.AddScoped<IRegisterIdSvrRepository, RegisterIdSvrRepository>();
 
-            services.AddDbContext<RegisterDatabaseContext>(options =>
-                                options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<RegisterDatabaseContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
         }
 
         private static IIdentityServerBuilder AddRegisterSigningCredential(this IIdentityServerBuilder builder, IConfiguration configuration)
