@@ -41,7 +41,7 @@ namespace CDR.Register.Discovery.API.Controllers
             using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
-                _logger.LogInformation($"Request received");
+                _logger.LogInformation("Request received");
             }
 
             // Check if the data recipient is active
@@ -79,7 +79,7 @@ namespace CDR.Register.Discovery.API.Controllers
             using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
-                _logger.LogInformation($"Request received");
+                _logger.LogInformation("Request received");
             }
             return Ok(await _discoveryService.GetDataRecipientsAsync(industry.ToIndustry()));
         }
@@ -94,7 +94,7 @@ namespace CDR.Register.Discovery.API.Controllers
             using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
-                _logger.LogInformation($"Request received");
+                _logger.LogInformation("Request received");
             }
             return Ok(await _discoveryService.GetDataRecipientsV2Async(industry.ToIndustry()));
         }

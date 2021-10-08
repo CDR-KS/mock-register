@@ -43,7 +43,7 @@ namespace CDR.Register.SSA.API.Controllers
             using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
-                _logger.LogInformation($"Request received");
+                _logger.LogInformation("Request received");
             }
             var result = await CheckSoftwareProduct(softwareProductId);
             if (result != null)
@@ -66,7 +66,7 @@ namespace CDR.Register.SSA.API.Controllers
             using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
-                _logger.LogInformation($"Request received");
+                _logger.LogInformation("Request received");
             }
             var result = await CheckSoftwareProduct(softwareProductId);
             if (result != null)
@@ -86,7 +86,7 @@ namespace CDR.Register.SSA.API.Controllers
             using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
-                _logger.LogInformation($"Request received");
+                _logger.LogInformation("Request received");
             }
             return Ok(_certificateService.JsonWebKeySet);
         }
