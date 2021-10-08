@@ -1,12 +1,13 @@
-﻿using System;
-using System.Threading.Tasks;
-using CDR.Register.API.Infrastructure.Authorization;
+﻿using CDR.Register.API.Infrastructure.Authorization;
 using CDR.Register.API.Infrastructure.Filters;
 using CDR.Register.API.Infrastructure.Models;
 using CDR.Register.API.Infrastructure.Services;
 using CDR.Register.SSA.API.Business;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Serilog.Context;
+using System;
+using System.Threading.Tasks;
 
 namespace CDR.Register.SSA.API.Controllers
 {
@@ -39,8 +40,11 @@ namespace CDR.Register.SSA.API.Controllers
         [ApiVersion("1")]
         public async Task<IActionResult> GetSoftwareStatementAssertion(string industry, string dataRecipientBrandId, string softwareProductId)
         {
-            _logger.LogInformation($"Request received to {nameof(SSAController)}.{nameof(GetSoftwareStatementAssertion)}");
-
+            using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
+            using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                _logger.LogInformation($"Request received");
+            }
             var result = await CheckSoftwareProduct(softwareProductId);
             if (result != null)
             {
@@ -59,8 +63,11 @@ namespace CDR.Register.SSA.API.Controllers
         [ApiVersion("2")]
         public async Task<IActionResult> GetSoftwareStatementAssertionV2(string industry, string dataRecipientBrandId, string softwareProductId)
         {
-            _logger.LogInformation($"Request received to {nameof(SSAController)}.{nameof(GetSoftwareStatementAssertionV2)}");
-
+            using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
+            using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                _logger.LogInformation($"Request received");
+            }
             var result = await CheckSoftwareProduct(softwareProductId);
             if (result != null)
             {
@@ -76,8 +83,11 @@ namespace CDR.Register.SSA.API.Controllers
         [ApiVersion("1")]
         public async Task<IActionResult> GetJwks()
         {
-            _logger.LogInformation($"Request received to {nameof(SSAController)}.{nameof(GetJwks)}");
-
+            using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
+            using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                _logger.LogInformation($"Request received");
+            }
             return Ok(_certificateService.JsonWebKeySet);
         }
 

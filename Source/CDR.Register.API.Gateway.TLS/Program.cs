@@ -21,6 +21,11 @@ namespace CDR.Register.API.Gateway.TLS
 
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
+                .Enrich.WithProcessId()
+                .Enrich.WithProcessName()
+                .Enrich.WithThreadId()
+                .Enrich.WithThreadName()
+                .Enrich.WithProperty("Environment", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"))
                 .CreateLogger();
 
             try

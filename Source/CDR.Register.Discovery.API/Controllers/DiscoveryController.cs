@@ -38,8 +38,8 @@ namespace CDR.Register.Discovery.API.Controllers
             [FromQuery(Name = "page"), CheckPage] string page,
             [FromQuery(Name = "page-size"), CheckPageSize] string pageSize)
         {
-            using (LogContext.PushProperty("Controller_Name", ControllerContext.RouteData.Values["controller"].ToString()))
-            using (LogContext.PushProperty("Method_Name", ControllerContext.RouteData.Values["action"].ToString()))
+            using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
+            using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
                 _logger.LogInformation($"Request received");
             }
@@ -76,8 +76,8 @@ namespace CDR.Register.Discovery.API.Controllers
         [ETag]
         public async Task<IActionResult> GetDataRecipients(string industry)
         {
-            using (LogContext.PushProperty("Controller_Name", ControllerContext.RouteData.Values["controller"].ToString()))
-            using (LogContext.PushProperty("Method_Name", ControllerContext.RouteData.Values["action"].ToString()))
+            using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
+            using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
                 _logger.LogInformation($"Request received");
             }
@@ -91,8 +91,8 @@ namespace CDR.Register.Discovery.API.Controllers
         [ETag]
         public async Task<IActionResult> GetDataRecipientsV2(string industry)
         {
-            using (LogContext.PushProperty("Controller_Name", ControllerContext.RouteData.Values["controller"].ToString()))
-            using (LogContext.PushProperty("Method_Name", ControllerContext.RouteData.Values["action"].ToString()))
+            using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
+            using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
                 _logger.LogInformation($"Request received");
             }

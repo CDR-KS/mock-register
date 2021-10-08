@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using CDR.Register.Repository.Infrastructure;
 using Microsoft.AspNetCore.Builder;

@@ -20,6 +20,12 @@ namespace CDR.Register.IdentityServer
 
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
+                .Enrich.FromLogContext()
+                .Enrich.WithProcessId()
+                .Enrich.WithProcessName()
+                .Enrich.WithThreadId()
+                .Enrich.WithThreadName()
+                .Enrich.WithProperty("Environment", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"))
                 .CreateLogger();
 
             try
