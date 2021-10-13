@@ -1,11 +1,11 @@
-using System;
-using System.Diagnostics;
-using System.IO;
 using CDR.Register.API.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Events;
+using System;
+using System.IO;
 
 namespace CDR.Register.Admin.API
 {
@@ -21,6 +21,8 @@ namespace CDR.Register.Admin.API
 
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
+                .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+                .MinimumLevel.Override("System", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .Enrich.WithProcessId()
                 .Enrich.WithProcessName()
@@ -28,15 +30,6 @@ namespace CDR.Register.Admin.API
                 .Enrich.WithThreadName()
                 .Enrich.WithProperty("Environment", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"))
                 .CreateLogger();
-
-            if (string.Equals(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"), "Development"))
-            {
-                Serilog.Debugging.SelfLog.Enable(msg =>
-                {
-                    Debug.Print(msg);
-                    Debugger.Break();
-                });
-            }
 
             try
             {

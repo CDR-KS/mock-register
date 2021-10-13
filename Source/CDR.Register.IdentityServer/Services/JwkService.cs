@@ -30,7 +30,6 @@ namespace CDR.Register.IdentityServer.Services
             var httpResponse = await _httpClient.GetAsync(jwksUrl);
             var responseContent = await httpResponse.Content.ReadAsStringAsync();
 
-            using (LogContext.PushProperty("ServiceName", GetType().Name))
             using (LogContext.PushProperty("MethodName", "GetJwksAsync"))
             {
                 _logger.LogDebug($"Http response body:\r\n{responseContent}");

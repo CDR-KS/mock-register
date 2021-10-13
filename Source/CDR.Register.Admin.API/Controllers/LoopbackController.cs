@@ -35,10 +35,9 @@ namespace CDR.Register.Admin.API.Controllers
         [Route("MockDataRecipientJwks")]
         public IActionResult MockDataRecipientJwks()
         {
-            using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
-                _logger.LogInformation("Request received");
+                _logger.LogInformation("Received request for Mock Data Recipient JWKS...");
             }
             var cert = new X509Certificate2("Certificates/client.pem");
             var key = (RSA)cert.PublicKey.Key;
@@ -71,10 +70,9 @@ namespace CDR.Register.Admin.API.Controllers
         [Route("MockDataRecipientClientAssertion")]
         public IActionResult MockDataRecipientClientAssertion()
         {
-            using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
-                _logger.LogInformation("Request received");
+                _logger.LogInformation("Received request for Mock Data Recipient Client Assertion...");
             }
             var privateKeyRaw = System.IO.File.ReadAllText("Certificates/client.key");
             var privateKey = privateKeyRaw.Replace("-----BEGIN PRIVATE KEY-----", "").Replace("-----END PRIVATE KEY-----", "").Replace("\r\n", "").Trim();

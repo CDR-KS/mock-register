@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Serilog.Context;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace CDR.Register.IdentityServer.Extensions
@@ -11,7 +10,6 @@ namespace CDR.Register.IdentityServer.Extensions
     {
         public static async Task LogErrorAndPublish<T>(this IMediator mediator, NotificationMessage notificationMessage, ILogger<T> logger)
         {
-            using (LogContext.PushProperty("ServiceName", "MediatrExtensions"))
             using (LogContext.PushProperty("MethodName", "LogErrorAndPublish"))
             {
                 logger.LogError($"Error: {notificationMessage.Code}: {notificationMessage.Content}");

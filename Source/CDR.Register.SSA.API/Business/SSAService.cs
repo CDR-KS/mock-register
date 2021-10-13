@@ -5,7 +5,6 @@ using Serilog.Context;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace CDR.Register.SSA.API.Business
@@ -44,7 +43,6 @@ namespace CDR.Register.SSA.API.Business
                 return null;
             }
 
-            using (LogContext.PushProperty("ServiceName", GetType().Name))
             using (LogContext.PushProperty("MethodName", "GetSoftwareStatementAssertionAsync"))
             {
                 _logger.LogDebug("SSA for dataRecipientBrandId: {dataRecipientBrandId} / softwareProductId: {softwareProductId} \r\n{ssa}", dataRecipientBrandId, softwareProductId, ssa.ToJson());
@@ -81,7 +79,6 @@ namespace CDR.Register.SSA.API.Business
 
             var ssa = _mapper.MapV2(softwareProduct);
 
-            using (LogContext.PushProperty("ServiceName", GetType().Name))
             using (LogContext.PushProperty("MethodName", "GetSoftwareStatementAssertionV2Async"))
             {
                 _logger.LogDebug("SSA for dataRecipientBrandId: {dataRecipientBrandId} / softwareProductId: {softwareProductId} \r\n{ssa}", dataRecipientBrandId, softwareProductId, ssa.ToJson());

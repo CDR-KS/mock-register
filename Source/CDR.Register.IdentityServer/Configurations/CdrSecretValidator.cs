@@ -45,7 +45,6 @@ namespace CDR.Register.IdentityServer.Configurations
         {
             var fail = new SecretValidationResult { Success = false };
 
-            using (LogContext.PushProperty("ServiceName", GetType().Name))
             using (LogContext.PushProperty("MethodName", "ValidateAsync"))
             {
                 _logger.LogInformation($"Starting");
@@ -168,7 +167,6 @@ namespace CDR.Register.IdentityServer.Configurations
                         && !string.IsNullOrWhiteSpace(s.Value)
                         && s.Value.Equals(certThumbprint, StringComparison.OrdinalIgnoreCase)).Any();
 
-            using (LogContext.PushProperty("ServiceName", GetType().Name))
             using (LogContext.PushProperty("MethodName", "ValidateAsync"))
             {
                 _logger.LogInformation("X509 client certificate thumbprint '{certThumbprint}' match = {certThumbprintSecretMatch}", certThumbprint, certThumbprintSecretMatch);
@@ -204,7 +202,6 @@ namespace CDR.Register.IdentityServer.Configurations
                         && !string.IsNullOrWhiteSpace(s.Value)
                         && s.Value.Equals(certCommonName, StringComparison.OrdinalIgnoreCase)).Any();
 
-            using (LogContext.PushProperty("ServiceName", GetType().Name))
             using (LogContext.PushProperty("MethodName", "ValidateAsync"))
             {
                 _logger.LogInformation("X509 client certificate common name '{commonName}' match = {certNameSecretMatch}", certCommonName, certNameSecretMatch);
@@ -235,7 +232,6 @@ namespace CDR.Register.IdentityServer.Configurations
                 Confirmation = cnf
             };
 
-            using (LogContext.PushProperty("ServiceName", GetType().Name))
             using (LogContext.PushProperty("MethodName", "ValidateAsync"))
             {
                 _logger.LogInformation($"Finishing Result: {result.Success}");

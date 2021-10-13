@@ -40,7 +40,6 @@ namespace CDR.Register.SSA.API.Controllers
         [ApiVersion("1")]
         public async Task<IActionResult> GetSoftwareStatementAssertion(string industry, string dataRecipientBrandId, string softwareProductId)
         {
-            using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
                 _logger.LogInformation("Request received");
@@ -63,7 +62,6 @@ namespace CDR.Register.SSA.API.Controllers
         [ApiVersion("2")]
         public async Task<IActionResult> GetSoftwareStatementAssertionV2(string industry, string dataRecipientBrandId, string softwareProductId)
         {
-            using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
                 _logger.LogInformation("Request received");
@@ -83,7 +81,6 @@ namespace CDR.Register.SSA.API.Controllers
         [ApiVersion("1")]
         public async Task<IActionResult> GetJwks()
         {
-            using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
                 _logger.LogInformation("Request received");

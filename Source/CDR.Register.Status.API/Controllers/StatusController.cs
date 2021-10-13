@@ -30,7 +30,6 @@ namespace CDR.Register.Status.API.Controllers
         [ETag]
         public async Task<IStatusCodeActionResult> GetDataRecipientsStatus(string industry)
         {
-            using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
                 _logger.LogInformation("Request received");
@@ -45,7 +44,6 @@ namespace CDR.Register.Status.API.Controllers
         [ETag]
         public async Task<IStatusCodeActionResult> GetSoftwareProductStatus(string industry)
         {
-            using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
                 _logger.LogInformation("Request received");

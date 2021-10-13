@@ -24,10 +24,9 @@ namespace CDR.Register.Admin.API.Controllers
         [Route("Metadata")]
         public async Task<IActionResult> LoadData()
         {
-            using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
-                _logger.LogInformation($"Log something in here");
+                _logger.LogInformation("Received request to LoadData");
             }
 
             using var reader = new StreamReader(Request.Body);
@@ -50,10 +49,9 @@ namespace CDR.Register.Admin.API.Controllers
         [Route("Metadata")]
         public async Task GetData()
         {
-            using (LogContext.PushProperty("ControllerName", ControllerContext.RouteData.Values["controller"].ToString()))
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
-                _logger.LogInformation($"Log something in here");
+                _logger.LogInformation("Received request to GetData");
             }
 
             var metadata = await _dbContext.GetJsonFromDatabase(_logger);

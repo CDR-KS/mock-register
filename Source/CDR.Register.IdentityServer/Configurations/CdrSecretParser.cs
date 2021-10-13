@@ -49,7 +49,6 @@ namespace CDR.Register.IdentityServer.Configurations
                 return null;
             }
 
-            using (LogContext.PushProperty("ServiceName", GetType().Name))
             using (LogContext.PushProperty("MethodName", "ParseAsync"))
             {
                 _logger.LogDebug("Start parsing for JWT client assertion in post body");
@@ -125,7 +124,6 @@ namespace CDR.Register.IdentityServer.Configurations
             }
             catch (Exception e)
             {
-                using (LogContext.PushProperty("ServiceName", GetType().Name))
                 using (LogContext.PushProperty("MethodName", "GetClientIdFromToken"))
                 {
                     _logger.LogWarning("Could not parse client assertion", e);
