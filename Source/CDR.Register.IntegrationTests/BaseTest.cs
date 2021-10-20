@@ -49,7 +49,7 @@ namespace CDR.Register.IntegrationTests
         protected const string ADDITIONAL_CERTIFICATE_FILENAME = "certificates\\client-additional.pfx";
         protected const string ADDITIONAL_CERTIFICATE_PASSWORD = CERTIFICATE_PASSWORD;
 
-        public const string SEEDDATA_FILENAME = "Data\\seed-data.json";
+        public static string SEEDDATA_FILENAME = $"Data\\seed-data.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json";
 
         // URLs
         public const string TLS_BaseURL = "https://localhost:7000";
