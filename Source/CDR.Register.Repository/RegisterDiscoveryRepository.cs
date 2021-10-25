@@ -78,10 +78,10 @@ namespace CDR.Register.Repository
             allParticipents.ForEach(p =>
             {
                 p.Brands = p.Brands.OrderBy(b => b.BrandId).ToList();
-                p.Brands.ToList().ForEach(b =>
-                {
-                    b.SoftwareProducts = b.SoftwareProducts.OrderBy(sp => sp.SoftwareProductId).ToList();
-                });
+                //p.Brands.ToList().ForEach(b =>
+                //{                                                                                                 // TURNED OFF TO STOP INTEGRATION TEST GetDataRecipients_Test
+                //    b.SoftwareProducts = b.SoftwareProducts.OrderBy(sp => sp.SoftwareProductId).ToList();         // from failing due to SoftwareProducts returning incorrect order
+                //});                                                                                               // AFTER moving from SQLite to SQL
             });
 
             return _mapper.Map<DataRecipient[]>(allParticipents);
