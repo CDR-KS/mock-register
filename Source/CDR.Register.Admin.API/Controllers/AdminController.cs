@@ -1,8 +1,9 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using CDR.Register.Repository.Infrastructure;
+﻿using CDR.Register.Repository.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Serilog.Context;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace CDR.Register.Admin.API.Controllers
 {
@@ -23,6 +24,11 @@ namespace CDR.Register.Admin.API.Controllers
         [Route("Metadata")]
         public async Task<IActionResult> LoadData()
         {
+            using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                _logger.LogInformation("Received request to LoadData");
+            }
+
             using var reader = new StreamReader(Request.Body);
             string json = await reader.ReadToEndAsync();
 
@@ -43,6 +49,11 @@ namespace CDR.Register.Admin.API.Controllers
         [Route("Metadata")]
         public async Task GetData()
         {
+            using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                _logger.LogInformation("Received request to GetData");
+            }
+
             var metadata = await _dbContext.GetJsonFromDatabase(_logger);
 
             // Return the raw JSON response.

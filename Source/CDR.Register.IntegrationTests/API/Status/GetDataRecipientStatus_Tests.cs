@@ -1,16 +1,15 @@
-﻿using System;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using CDR.Register.Repository.Entities;
+﻿using CDR.Register.Repository.Entities;
 using CDR.Register.Repository.Infrastructure;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using Xunit;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Xunit;
 #nullable enable
 
 namespace CDR.Register.IntegrationTests.API.Status
@@ -22,7 +21,7 @@ namespace CDR.Register.IntegrationTests.API.Status
     {
         private string GetExpectedDataRecipientsStatus()
         {
-            using var dbContext = new RegisterDatabaseContext(new DbContextOptionsBuilder<RegisterDatabaseContext>().UseSqlite(Configuration.GetConnectionString("DefaultConnection")).Options);
+            using var dbContext = new RegisterDatabaseContext(new DbContextOptionsBuilder<RegisterDatabaseContext>().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")).Options);
 
             var expectedDataRecipientsStatus = new
             {

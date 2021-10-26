@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CDR.Register.Repository.Migrations
 {
-    public partial class InitialSchema : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,8 +11,8 @@ namespace CDR.Register.Repository.Migrations
                 name: "BrandStatus",
                 columns: table => new
                 {
-                    BrandStatusId = table.Column<int>(type: "INTEGER", nullable: false),
-                    BrandStatusCode = table.Column<string>(type: "TEXT", maxLength: 25, nullable: false)
+                    BrandStatusId = table.Column<int>(type: "int", nullable: false),
+                    BrandStatusCode = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -23,8 +23,8 @@ namespace CDR.Register.Repository.Migrations
                 name: "IndustryType",
                 columns: table => new
                 {
-                    IndustryTypeId = table.Column<int>(type: "INTEGER", nullable: false),
-                    IndustryTypeCode = table.Column<string>(type: "TEXT", maxLength: 25, nullable: false)
+                    IndustryTypeId = table.Column<int>(type: "int", nullable: false),
+                    IndustryTypeCode = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -35,8 +35,8 @@ namespace CDR.Register.Repository.Migrations
                 name: "OrganisationType",
                 columns: table => new
                 {
-                    OrganisationTypeId = table.Column<int>(type: "INTEGER", nullable: false),
-                    OrganisationTypeCode = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false)
+                    OrganisationTypeId = table.Column<int>(type: "int", nullable: false),
+                    OrganisationTypeCode = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,8 +47,8 @@ namespace CDR.Register.Repository.Migrations
                 name: "ParticipationStatus",
                 columns: table => new
                 {
-                    ParticipationStatusId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ParticipationStatusCode = table.Column<string>(type: "TEXT", maxLength: 25, nullable: false)
+                    ParticipationStatusId = table.Column<int>(type: "int", nullable: false),
+                    ParticipationStatusCode = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -59,8 +59,8 @@ namespace CDR.Register.Repository.Migrations
                 name: "ParticipationType",
                 columns: table => new
                 {
-                    ParticipationTypeId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ParticipationTypeCode = table.Column<string>(type: "TEXT", maxLength: 2, nullable: false)
+                    ParticipationTypeId = table.Column<int>(type: "int", nullable: false),
+                    ParticipationTypeCode = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -71,8 +71,8 @@ namespace CDR.Register.Repository.Migrations
                 name: "RegisterUType",
                 columns: table => new
                 {
-                    RegisterUTypeId = table.Column<int>(type: "INTEGER", nullable: false),
-                    RegisterUTypeCode = table.Column<string>(type: "TEXT", maxLength: 25, nullable: false)
+                    RegisterUTypeId = table.Column<int>(type: "int", nullable: false),
+                    RegisterUTypeCode = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -83,8 +83,8 @@ namespace CDR.Register.Repository.Migrations
                 name: "SoftwareProductStatus",
                 columns: table => new
                 {
-                    SoftwareProductStatusId = table.Column<int>(type: "INTEGER", nullable: false),
-                    SoftwareProductStatusCode = table.Column<string>(type: "TEXT", maxLength: 25, nullable: false)
+                    SoftwareProductStatusId = table.Column<int>(type: "int", nullable: false),
+                    SoftwareProductStatusCode = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,18 +95,18 @@ namespace CDR.Register.Repository.Migrations
                 name: "LegalEntity",
                 columns: table => new
                 {
-                    LegalEntityId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    LegalEntityName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    LogoUri = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false),
-                    RegistrationNumber = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
-                    RegistrationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    RegisteredCountry = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
-                    Abn = table.Column<string>(type: "TEXT", maxLength: 11, nullable: true),
-                    Acn = table.Column<string>(type: "TEXT", maxLength: 9, nullable: true),
-                    Arbn = table.Column<string>(type: "TEXT", maxLength: 9, nullable: true),
-                    IndustryCode = table.Column<string>(type: "TEXT", maxLength: 4, nullable: true),
-                    OrganisationTypeId = table.Column<int>(type: "INTEGER", nullable: true),
-                    AccreditationNumber = table.Column<string>(type: "TEXT", maxLength: 25, nullable: true)
+                    LegalEntityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LegalEntityName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    LogoUri = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    RegistrationNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RegisteredCountry = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Abn = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: true),
+                    Acn = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: true),
+                    Arbn = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: true),
+                    IndustryCode = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: true),
+                    OrganisationTypeId = table.Column<int>(type: "int", nullable: true),
+                    AccreditationNumber = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -123,11 +123,11 @@ namespace CDR.Register.Repository.Migrations
                 name: "Participation",
                 columns: table => new
                 {
-                    ParticipationId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    LegalEntityId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    ParticipationTypeId = table.Column<int>(type: "INTEGER", nullable: false),
-                    IndustryId = table.Column<int>(type: "INTEGER", nullable: false),
-                    StatusId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ParticipationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LegalEntityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ParticipationTypeId = table.Column<int>(type: "int", nullable: false),
+                    IndustryId = table.Column<int>(type: "int", nullable: false),
+                    StatusId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -162,12 +162,12 @@ namespace CDR.Register.Repository.Migrations
                 name: "Brand",
                 columns: table => new
                 {
-                    BrandId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    BrandName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    LogoUri = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false),
-                    BrandStatusId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ParticipationId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    LastUpdated = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    BrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BrandName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    LogoUri = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    BrandStatusId = table.Column<int>(type: "int", nullable: false),
+                    ParticipationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LastUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -190,9 +190,9 @@ namespace CDR.Register.Repository.Migrations
                 name: "AuthDetail",
                 columns: table => new
                 {
-                    BrandId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    RegisterUTypeId = table.Column<int>(type: "INTEGER", nullable: false),
-                    JwksEndpoint = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false)
+                    BrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RegisterUTypeId = table.Column<int>(type: "int", nullable: false),
+                    JwksEndpoint = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -215,13 +215,13 @@ namespace CDR.Register.Repository.Migrations
                 name: "Endpoint",
                 columns: table => new
                 {
-                    BrandId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Version = table.Column<string>(type: "TEXT", maxLength: 25, nullable: false),
-                    PublicBaseUri = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false),
-                    ResourceBaseUri = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false),
-                    InfosecBaseUri = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false),
-                    ExtensionBaseUri = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
-                    WebsiteUri = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false)
+                    BrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Version = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    PublicBaseUri = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    ResourceBaseUri = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    InfosecBaseUri = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    ExtensionBaseUri = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    WebsiteUri = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -238,21 +238,21 @@ namespace CDR.Register.Repository.Migrations
                 name: "SoftwareProduct",
                 columns: table => new
                 {
-                    SoftwareProductId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    SoftwareProductName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    SoftwareProductDescription = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true),
-                    LogoUri = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false),
-                    SectorIdentifierUri = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true),
-                    ClientUri = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false),
-                    TosUri = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true),
-                    PolicyUri = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true),
-                    RecipientBaseUri = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false),
-                    RevocationUri = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false),
-                    RedirectUris = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false),
-                    JwksUri = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false),
-                    Scope = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false),
-                    StatusId = table.Column<int>(type: "INTEGER", nullable: false),
-                    BrandId = table.Column<Guid>(type: "TEXT", nullable: false)
+                    SoftwareProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SoftwareProductName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    SoftwareProductDescription = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    LogoUri = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    SectorIdentifierUri = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    ClientUri = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    TosUri = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    PolicyUri = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    RecipientBaseUri = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    RevocationUri = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    RedirectUris = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
+                    JwksUri = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    Scope = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    StatusId = table.Column<int>(type: "int", nullable: false),
+                    BrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -275,10 +275,10 @@ namespace CDR.Register.Repository.Migrations
                 name: "SoftwareProductCertificate",
                 columns: table => new
                 {
-                    SoftwareProductCertificateId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    SoftwareProductId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    CommonName = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false),
-                    Thumbprint = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false)
+                    SoftwareProductCertificateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SoftwareProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CommonName = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
+                    Thumbprint = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -294,17 +294,12 @@ namespace CDR.Register.Repository.Migrations
             migrationBuilder.InsertData(
                 table: "BrandStatus",
                 columns: new[] { "BrandStatusId", "BrandStatusCode" },
-                values: new object[] { 1, "ACTIVE" });
-
-            migrationBuilder.InsertData(
-                table: "BrandStatus",
-                columns: new[] { "BrandStatusId", "BrandStatusCode" },
-                values: new object[] { 2, "INACTIVE" });
-
-            migrationBuilder.InsertData(
-                table: "BrandStatus",
-                columns: new[] { "BrandStatusId", "BrandStatusCode" },
-                values: new object[] { 3, "REMOVED" });
+                values: new object[,]
+                {
+                    { 1, "ACTIVE" },
+                    { 2, "INACTIVE" },
+                    { 3, "REMOVED" }
+                });
 
             migrationBuilder.InsertData(
                 table: "IndustryType",
@@ -314,72 +309,37 @@ namespace CDR.Register.Repository.Migrations
             migrationBuilder.InsertData(
                 table: "OrganisationType",
                 columns: new[] { "OrganisationTypeId", "OrganisationTypeCode" },
-                values: new object[] { 1, "SOLE_TRADER" });
-
-            migrationBuilder.InsertData(
-                table: "OrganisationType",
-                columns: new[] { "OrganisationTypeId", "OrganisationTypeCode" },
-                values: new object[] { 2, "COMPANY" });
-
-            migrationBuilder.InsertData(
-                table: "OrganisationType",
-                columns: new[] { "OrganisationTypeId", "OrganisationTypeCode" },
-                values: new object[] { 3, "PARTNERSHIP" });
-
-            migrationBuilder.InsertData(
-                table: "OrganisationType",
-                columns: new[] { "OrganisationTypeId", "OrganisationTypeCode" },
-                values: new object[] { 4, "TRUST" });
-
-            migrationBuilder.InsertData(
-                table: "OrganisationType",
-                columns: new[] { "OrganisationTypeId", "OrganisationTypeCode" },
-                values: new object[] { 5, "GOVERNMENT_ENTITY" });
-
-            migrationBuilder.InsertData(
-                table: "OrganisationType",
-                columns: new[] { "OrganisationTypeId", "OrganisationTypeCode" },
-                values: new object[] { 6, "OTHER" });
+                values: new object[,]
+                {
+                    { 1, "SOLE_TRADER" },
+                    { 2, "COMPANY" },
+                    { 3, "PARTNERSHIP" },
+                    { 4, "TRUST" },
+                    { 5, "GOVERNMENT_ENTITY" },
+                    { 6, "OTHER" }
+                });
 
             migrationBuilder.InsertData(
                 table: "ParticipationStatus",
                 columns: new[] { "ParticipationStatusId", "ParticipationStatusCode" },
-                values: new object[] { 6, "INACTIVE" });
-
-            migrationBuilder.InsertData(
-                table: "ParticipationStatus",
-                columns: new[] { "ParticipationStatusId", "ParticipationStatusCode" },
-                values: new object[] { 5, "SURRENDERED" });
-
-            migrationBuilder.InsertData(
-                table: "ParticipationStatus",
-                columns: new[] { "ParticipationStatusId", "ParticipationStatusCode" },
-                values: new object[] { 4, "REVOKED" });
-
-            migrationBuilder.InsertData(
-                table: "ParticipationStatus",
-                columns: new[] { "ParticipationStatusId", "ParticipationStatusCode" },
-                values: new object[] { 1, "ACTIVE" });
-
-            migrationBuilder.InsertData(
-                table: "ParticipationStatus",
-                columns: new[] { "ParticipationStatusId", "ParticipationStatusCode" },
-                values: new object[] { 2, "REMOVED" });
-
-            migrationBuilder.InsertData(
-                table: "ParticipationStatus",
-                columns: new[] { "ParticipationStatusId", "ParticipationStatusCode" },
-                values: new object[] { 3, "SUSPENDED" });
+                values: new object[,]
+                {
+                    { 6, "INACTIVE" },
+                    { 5, "SURRENDERED" },
+                    { 4, "REVOKED" },
+                    { 1, "ACTIVE" },
+                    { 2, "REMOVED" },
+                    { 3, "SUSPENDED" }
+                });
 
             migrationBuilder.InsertData(
                 table: "ParticipationType",
                 columns: new[] { "ParticipationTypeId", "ParticipationTypeCode" },
-                values: new object[] { 1, "DH" });
-
-            migrationBuilder.InsertData(
-                table: "ParticipationType",
-                columns: new[] { "ParticipationTypeId", "ParticipationTypeCode" },
-                values: new object[] { 2, "DR" });
+                values: new object[,]
+                {
+                    { 1, "DH" },
+                    { 2, "DR" }
+                });
 
             migrationBuilder.InsertData(
                 table: "RegisterUType",
@@ -389,17 +349,12 @@ namespace CDR.Register.Repository.Migrations
             migrationBuilder.InsertData(
                 table: "SoftwareProductStatus",
                 columns: new[] { "SoftwareProductStatusId", "SoftwareProductStatusCode" },
-                values: new object[] { 2, "INACTIVE" });
-
-            migrationBuilder.InsertData(
-                table: "SoftwareProductStatus",
-                columns: new[] { "SoftwareProductStatusId", "SoftwareProductStatusCode" },
-                values: new object[] { 1, "ACTIVE" });
-
-            migrationBuilder.InsertData(
-                table: "SoftwareProductStatus",
-                columns: new[] { "SoftwareProductStatusId", "SoftwareProductStatusCode" },
-                values: new object[] { 3, "REMOVED" });
+                values: new object[,]
+                {
+                    { 2, "INACTIVE" },
+                    { 1, "ACTIVE" },
+                    { 3, "REMOVED" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AuthDetail_RegisterUTypeId",

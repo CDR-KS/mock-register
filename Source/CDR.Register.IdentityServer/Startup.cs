@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
+using Serilog;
 
 namespace CDR.Register.IdentityServer
 {
@@ -30,10 +31,10 @@ namespace CDR.Register.IdentityServer
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public static void Configure(
-            IApplicationBuilder app,
-            IWebHostEnvironment env)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSerilogRequestLogging();
+
             // Allow sensitive data to be logged in dev environment only
             IdentityModelEventSource.ShowPII = env.IsDevelopment();
             app.UseIdentityServer();

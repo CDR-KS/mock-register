@@ -3,6 +3,7 @@ using System;
 using CDR.Register.Repository.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CDR.Register.Repository.Migrations
@@ -14,20 +15,22 @@ namespace CDR.Register.Repository.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.5");
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "5.0.5")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("CDR.Register.Repository.Entities.AuthDetail", b =>
                 {
                     b.Property<Guid>("BrandId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("RegisterUTypeId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("JwksEndpoint")
                         .IsRequired()
                         .HasMaxLength(1000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.HasKey("BrandId", "RegisterUTypeId");
 
@@ -40,26 +43,26 @@ namespace CDR.Register.Repository.Migrations
                 {
                     b.Property<Guid>("BrandId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("BrandName")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("BrandStatusId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("LastUpdated")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("LogoUri")
                         .IsRequired()
                         .HasMaxLength(1000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<Guid>("ParticipationId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("BrandId");
 
@@ -73,12 +76,12 @@ namespace CDR.Register.Repository.Migrations
             modelBuilder.Entity("CDR.Register.Repository.Entities.BrandStatus", b =>
                 {
                     b.Property<int>("BrandStatusId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("BrandStatusCode")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(25)");
 
                     b.HasKey("BrandStatusId");
 
@@ -105,36 +108,36 @@ namespace CDR.Register.Repository.Migrations
             modelBuilder.Entity("CDR.Register.Repository.Entities.Endpoint", b =>
                 {
                     b.Property<Guid>("BrandId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ExtensionBaseUri")
                         .HasMaxLength(500)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("InfosecBaseUri")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("PublicBaseUri")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("ResourceBaseUri")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Version")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("WebsiteUri")
                         .IsRequired()
                         .HasMaxLength(1000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.HasKey("BrandId");
 
@@ -144,12 +147,12 @@ namespace CDR.Register.Repository.Migrations
             modelBuilder.Entity("CDR.Register.Repository.Entities.IndustryType", b =>
                 {
                     b.Property<int>("IndustryTypeId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("IndustryTypeCode")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(25)");
 
                     b.HasKey("IndustryTypeId");
 
@@ -167,51 +170,51 @@ namespace CDR.Register.Repository.Migrations
                 {
                     b.Property<Guid>("LegalEntityId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Abn")
                         .HasMaxLength(11)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(11)");
 
                     b.Property<string>("AccreditationNumber")
                         .HasMaxLength(25)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("Acn")
                         .HasMaxLength(9)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(9)");
 
                     b.Property<string>("Arbn")
                         .HasMaxLength(9)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(9)");
 
                     b.Property<string>("IndustryCode")
                         .HasMaxLength(4)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(4)");
 
                     b.Property<string>("LegalEntityName")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("LogoUri")
                         .IsRequired()
                         .HasMaxLength(1000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<int?>("OrganisationTypeId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("RegisteredCountry")
                         .HasMaxLength(100)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("RegistrationDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("RegistrationNumber")
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("LegalEntityId");
 
@@ -223,12 +226,12 @@ namespace CDR.Register.Repository.Migrations
             modelBuilder.Entity("CDR.Register.Repository.Entities.OrganisationType", b =>
                 {
                     b.Property<int>("OrganisationTypeId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("OrganisationTypeCode")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("OrganisationTypeId");
 
@@ -271,19 +274,19 @@ namespace CDR.Register.Repository.Migrations
                 {
                     b.Property<Guid>("ParticipationId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("IndustryId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<Guid>("LegalEntityId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ParticipationTypeId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("StatusId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("ParticipationId");
 
@@ -301,12 +304,12 @@ namespace CDR.Register.Repository.Migrations
             modelBuilder.Entity("CDR.Register.Repository.Entities.ParticipationStatus", b =>
                 {
                     b.Property<int>("ParticipationStatusId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("ParticipationStatusCode")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(25)");
 
                     b.HasKey("ParticipationStatusId");
 
@@ -348,12 +351,12 @@ namespace CDR.Register.Repository.Migrations
             modelBuilder.Entity("CDR.Register.Repository.Entities.ParticipationType", b =>
                 {
                     b.Property<int>("ParticipationTypeId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("ParticipationTypeCode")
                         .IsRequired()
                         .HasMaxLength(2)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(2)");
 
                     b.HasKey("ParticipationTypeId");
 
@@ -375,12 +378,12 @@ namespace CDR.Register.Repository.Migrations
             modelBuilder.Entity("CDR.Register.Repository.Entities.RegisterUType", b =>
                 {
                     b.Property<int>("RegisterUTypeId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("RegisterUTypeCode")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(25)");
 
                     b.HasKey("RegisterUTypeId");
 
@@ -398,68 +401,68 @@ namespace CDR.Register.Repository.Migrations
                 {
                     b.Property<Guid>("SoftwareProductId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("BrandId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ClientUri")
                         .IsRequired()
                         .HasMaxLength(1000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("JwksUri")
                         .IsRequired()
                         .HasMaxLength(1000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("LogoUri")
                         .IsRequired()
                         .HasMaxLength(1000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("PolicyUri")
                         .HasMaxLength(1000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("RecipientBaseUri")
                         .HasMaxLength(1000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("RedirectUris")
                         .IsRequired()
                         .HasMaxLength(2000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<string>("RevocationUri")
                         .IsRequired()
                         .HasMaxLength(1000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("Scope")
                         .IsRequired()
                         .HasMaxLength(1000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("SectorIdentifierUri")
                         .HasMaxLength(1000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("SoftwareProductDescription")
                         .HasMaxLength(1000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("SoftwareProductName")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("StatusId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("TosUri")
                         .HasMaxLength(1000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.HasKey("SoftwareProductId");
 
@@ -474,20 +477,20 @@ namespace CDR.Register.Repository.Migrations
                 {
                     b.Property<Guid>("SoftwareProductCertificateId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CommonName")
                         .IsRequired()
                         .HasMaxLength(2000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<Guid>("SoftwareProductId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Thumbprint")
                         .IsRequired()
                         .HasMaxLength(2000)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(2000)");
 
                     b.HasKey("SoftwareProductCertificateId");
 
@@ -499,12 +502,12 @@ namespace CDR.Register.Repository.Migrations
             modelBuilder.Entity("CDR.Register.Repository.Entities.SoftwareProductStatus", b =>
                 {
                     b.Property<int>("SoftwareProductStatusId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("SoftwareProductStatusCode")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(25)");
 
                     b.HasKey("SoftwareProductStatusId");
 

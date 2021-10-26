@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using CDR.Register.Repository.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using System.Threading.Tasks;
 
 namespace CDR.Register.Admin.API
 {
@@ -27,8 +28,7 @@ namespace CDR.Register.Admin.API
 
             // This is to manage the EF database context through the web API DI.
             // If this is to be done inside the repository project itself, we need to manage the context life-cycle explicitly.
-            services.AddDbContext<RegisterDatabaseContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<RegisterDatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +38,8 @@ namespace CDR.Register.Admin.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSerilogRequestLogging();
 
             app.UseHttpsRedirection();
 

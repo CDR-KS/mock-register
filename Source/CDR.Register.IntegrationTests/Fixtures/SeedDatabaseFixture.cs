@@ -15,20 +15,25 @@ namespace CDR.Register.IntegrationTests.Fixtures
         // Ensure database is in known state prior to running tests by seeding it
         public async Task InitializeAsync()
         {
-            string jsonFromSeedDataFile =
-                (await File.ReadAllTextAsync(BaseTest.SEEDDATA_FILENAME))
-                .JsonStripComments();
+            try
+            {
+                string jsonFromSeedDataFile = (await File.ReadAllTextAsync(BaseTest.SEEDDATA_FILENAME)).JsonStripComments();
 
-            var clientHandler = new HttpClientHandler();
-            clientHandler.ServerCertificateCustomValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
-            var client = new HttpClient(clientHandler);
+                var clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+                var client = new HttpClient(clientHandler);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, BaseTest.ADMIN_URL);
-            request.Content = new StringContent(jsonFromSeedDataFile, Encoding.UTF8, "application/json");
-            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                var request = new HttpRequestMessage(HttpMethod.Post, BaseTest.ADMIN_URL);
+                request.Content = new StringContent(jsonFromSeedDataFile, Encoding.UTF8, "application/json");
+                request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var response = await client.SendAsync(request);
-            if (response.StatusCode != HttpStatusCode.OK)
+                var response = await client.SendAsync(request);
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    throw new Exception("Error seeding database");
+                }
+            }
+            catch (Exception ex)
             {
                 throw new Exception("Error seeding database");
             }

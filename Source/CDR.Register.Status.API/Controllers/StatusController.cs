@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
-using CDR.Register.API.Infrastructure;
+﻿using CDR.Register.API.Infrastructure;
 using CDR.Register.API.Infrastructure.Filters;
 using CDR.Register.Status.API.Business;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Logging;
+using Serilog.Context;
+using System.Threading.Tasks;
 
 namespace CDR.Register.Status.API.Controllers
 {
@@ -29,7 +30,10 @@ namespace CDR.Register.Status.API.Controllers
         [ETag]
         public async Task<IStatusCodeActionResult> GetDataRecipientsStatus(string industry)
         {
-            _logger.LogInformation($"Request received to {nameof(StatusController)}.{nameof(GetDataRecipientsStatus)}");
+            using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                _logger.LogInformation("Request received");
+            }
             return Ok(await _statusService.GetDataRecipientStatusesAsync(industry.ToIndustry()));
         }
 
@@ -40,7 +44,10 @@ namespace CDR.Register.Status.API.Controllers
         [ETag]
         public async Task<IStatusCodeActionResult> GetSoftwareProductStatus(string industry)
         {
-            _logger.LogInformation($"Request received to {nameof(StatusController)}.{nameof(GetSoftwareProductStatus)}");
+            using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                _logger.LogInformation("Request received");
+            }
             return Ok(await _statusService.GetSoftwareProductStatusesAsync(industry.ToIndustry()));
         }
     }

@@ -27,8 +27,7 @@ namespace CDR.Register.SSA.API
             services.AddSingleton<ICertificateService, CertificateService>();
             services.AddSingleton<ITokenizerService, TokenizerService>();
 
-            services.AddDbContext<RegisterDatabaseContext>(options =>
-                options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<RegisterDatabaseContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMediatR(typeof(Startup));
 

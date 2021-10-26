@@ -1,10 +1,11 @@
-﻿using System;
+﻿using CDR.Register.Domain.Repositories;
+using CDR.Register.SSA.API.Business.Models;
+using Microsoft.Extensions.Logging;
+using Serilog.Context;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using CDR.Register.Domain.Repositories;
-using CDR.Register.SSA.API.Business.Models;
-using Microsoft.Extensions.Logging;
 
 namespace CDR.Register.SSA.API.Business
 {
@@ -42,7 +43,10 @@ namespace CDR.Register.SSA.API.Business
                 return null;
             }
 
-            _logger.LogDebug("SSA for dataRecipientBrandId: {dataRecipientBrandId} / softwareProductId: {softwareProductId} \r\n{ssa}", dataRecipientBrandId, softwareProductId, ssa.ToJson());
+            using (LogContext.PushProperty("MethodName", "GetSoftwareStatementAssertionAsync"))
+            {
+                _logger.LogDebug("SSA for dataRecipientBrandId: {dataRecipientBrandId} / softwareProductId: {softwareProductId} \r\n{ssa}", dataRecipientBrandId, softwareProductId, ssa.ToJson());
+            }
 
             // Validate the SSA
             var validationContext = new ValidationContext(ssa);
@@ -52,7 +56,6 @@ namespace CDR.Register.SSA.API.Business
                 var errorMessage = $"Validation errors in SSA for dataRecipientBrandId: {dataRecipientBrandId} / softwareProductId: {softwareProductId} \r\n{validationResults.ToJson()}";
                 throw new SSAValidationException(errorMessage);
             }
-
             return ssa;
         }
 
@@ -76,7 +79,10 @@ namespace CDR.Register.SSA.API.Business
 
             var ssa = _mapper.MapV2(softwareProduct);
 
-            _logger.LogDebug("SSA for dataRecipientBrandId: {dataRecipientBrandId} / softwareProductId: {softwareProductId} \r\n{ssa}", dataRecipientBrandId, softwareProductId, ssa.ToJson());
+            using (LogContext.PushProperty("MethodName", "GetSoftwareStatementAssertionV2Async"))
+            {
+                _logger.LogDebug("SSA for dataRecipientBrandId: {dataRecipientBrandId} / softwareProductId: {softwareProductId} \r\n{ssa}", dataRecipientBrandId, softwareProductId, ssa.ToJson());
+            }
 
             // Validate the SSA
             var validationContext = new ValidationContext(ssa);
@@ -86,7 +92,6 @@ namespace CDR.Register.SSA.API.Business
                 var errorMessage = $"Validation errors in SSA for dataRecipientBrandId: {dataRecipientBrandId} / softwareProductId: {softwareProductId} \r\n{validationResults.ToJson()}";
                 throw new SSAValidationException(errorMessage);
             }
-
             return ssa;
         }
 

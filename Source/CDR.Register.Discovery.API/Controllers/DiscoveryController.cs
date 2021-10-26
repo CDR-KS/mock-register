@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using CDR.Register.API.Infrastructure;
+﻿using CDR.Register.API.Infrastructure;
 using CDR.Register.API.Infrastructure.Authorization;
 using CDR.Register.API.Infrastructure.Filters;
 using CDR.Register.API.Infrastructure.Models;
@@ -8,6 +6,9 @@ using CDR.Register.API.Infrastructure.Services;
 using CDR.Register.Discovery.API.Business;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Serilog.Context;
+using System;
+using System.Threading.Tasks;
 
 namespace CDR.Register.Discovery.API.Controllers
 {
@@ -20,7 +21,9 @@ namespace CDR.Register.Discovery.API.Controllers
         private readonly ILogger<DiscoveryController> _logger;
         private readonly IDataRecipientStatusCheckService _statusCheckService;
 
-        public DiscoveryController(IDiscoveryService discoveryService, ILogger<DiscoveryController> logger, IDataRecipientStatusCheckService statusCheckService)
+        public DiscoveryController(IDiscoveryService discoveryService,
+                                    ILogger<DiscoveryController> logger, 
+                                    IDataRecipientStatusCheckService statusCheckService)
         {
             _discoveryService = discoveryService;
             _logger = logger;
@@ -37,7 +40,10 @@ namespace CDR.Register.Discovery.API.Controllers
             [FromQuery(Name = "page"), CheckPage] string page,
             [FromQuery(Name = "page-size"), CheckPageSize] string pageSize)
         {
-            _logger.LogInformation($"Request received to {nameof(DiscoveryController)}.{nameof(GetDataHolderBrands)}");
+            using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                _logger.LogInformation($"Request received to {nameof(DiscoveryController)}.{nameof(GetDataHolderBrands)}");
+            }
 
             // Check if the data recipient is active
             var result = await CheckSoftwareProduct();
@@ -71,7 +77,10 @@ namespace CDR.Register.Discovery.API.Controllers
         [ETag]
         public async Task<IActionResult> GetDataRecipients(string industry)
         {
-            _logger.LogInformation($"Request received to {nameof(DiscoveryController)}.{nameof(GetDataRecipients)}");
+            using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                _logger.LogInformation($"Request received to {nameof(DiscoveryController)}.{nameof(GetDataRecipients)}");
+            }
             return Ok(await _discoveryService.GetDataRecipientsAsync(industry.ToIndustry()));
         }
 
@@ -82,7 +91,10 @@ namespace CDR.Register.Discovery.API.Controllers
         [ETag]
         public async Task<IActionResult> GetDataRecipientsV2(string industry)
         {
-            _logger.LogInformation($"Request received to {nameof(DiscoveryController)}.{nameof(GetDataRecipientsV2)}");
+            using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
+            {
+                _logger.LogInformation($"Request received to {nameof(DiscoveryController)}.{nameof(GetDataRecipientsV2)}");
+            }
             return Ok(await _discoveryService.GetDataRecipientsV2Async(industry.ToIndustry()));
         }
 
