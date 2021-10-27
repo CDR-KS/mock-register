@@ -20,11 +20,10 @@ namespace CDR.Register.SSA.API.Controllers
         private readonly ICertificateService _certificateService;
         private readonly IDataRecipientStatusCheckService _statusCheckService;
 
-        public SSAController(
-            ISSAService ssaService,
-            ILogger<SSAController> logger,
-            ICertificateService certificateService,
-            IDataRecipientStatusCheckService statusCheckService)
+        public SSAController(ISSAService ssaService,
+                            ILogger<SSAController> logger,
+                            ICertificateService certificateService,
+                            IDataRecipientStatusCheckService statusCheckService)
         {
             _ssaService = ssaService;
             _logger = logger;
@@ -42,7 +41,7 @@ namespace CDR.Register.SSA.API.Controllers
         {
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
-                _logger.LogInformation("Request received");
+                _logger.LogInformation($"Received request to {ControllerContext.RouteData.Values["action"]}");
             }
             var result = await CheckSoftwareProduct(softwareProductId);
             if (result != null)
@@ -64,7 +63,7 @@ namespace CDR.Register.SSA.API.Controllers
         {
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
-                _logger.LogInformation("Request received");
+                _logger.LogInformation($"Received request to {ControllerContext.RouteData.Values["action"]}");
             }
             var result = await CheckSoftwareProduct(softwareProductId);
             if (result != null)
@@ -83,7 +82,7 @@ namespace CDR.Register.SSA.API.Controllers
         {
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
-                _logger.LogInformation("Request received");
+                _logger.LogInformation($"Received request to {ControllerContext.RouteData.Values["action"]}");
             }
             return Ok(_certificateService.JsonWebKeySet);
         }

@@ -26,7 +26,7 @@ namespace CDR.Register.Admin.API.Controllers
         {
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
-                _logger.LogInformation("Received request to LoadData");
+                _logger.LogInformation($"Received request to {ControllerContext.RouteData.Values["action"]}");
             }
 
             using var reader = new StreamReader(Request.Body);
