@@ -32,7 +32,7 @@ namespace CDR.Register.Status.API.Controllers
         {
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
-                _logger.LogInformation("Request received");
+                _logger.LogInformation($"Received request to {ControllerContext.RouteData.Values["action"]}");
             }
             return Ok(await _statusService.GetDataRecipientStatusesAsync(industry.ToIndustry()));
         }
@@ -46,7 +46,7 @@ namespace CDR.Register.Status.API.Controllers
         {
             using (LogContext.PushProperty("MethodName", ControllerContext.RouteData.Values["action"].ToString()))
             {
-                _logger.LogInformation("Request received");
+                _logger.LogInformation($"Received request to {ControllerContext.RouteData.Values["action"]}");
             }
             return Ok(await _statusService.GetSoftwareProductStatusesAsync(industry.ToIndustry()));
         }
