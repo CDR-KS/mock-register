@@ -22,6 +22,7 @@ namespace CDR.Register.IdentityServer
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
                 .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+                .MinimumLevel.Override("Microsoft.Extensions.Http.DefaultHttpClientFactory", LogEventLevel.Warning)
                 .MinimumLevel.Override("System", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .Enrich.WithProcessId()
