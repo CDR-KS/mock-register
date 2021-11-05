@@ -79,6 +79,10 @@ namespace CDR.Register.IdentityServer.Configurations
             }
             catch (Exception e)
             {
+                using (LogContext.PushProperty("MethodName", "ValidateAsync"))
+                {
+                    _logger.LogError(e, "Trusted Keys Exception Error");
+                }
                 await _mediator.LogErrorAndPublish(new NotificationMessage(GetType().Name, "607", null,
                     $"Could not parse secrets. {e.InnerException?.Message ?? e.Message}"), _logger);
                 return fail;
