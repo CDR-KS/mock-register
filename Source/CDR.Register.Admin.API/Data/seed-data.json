@@ -35,10 +35,10 @@
                   "ClientUri": "https://mocksoftware/mybudgetapp",
                   "TosUri": "https://mocksoftware/mybudgetapp/terms",
                   "PolicyUri": "https://mocksoftware/mybudgetapp/policy",
-                  "RecipientBaseUri": "https://mock-data-recipient:9001",
-                  "RevocationUri": "https://mock-data-recipient:9001/revocation",
-                  "RedirectUris": "https://mock-data-recipient:9001/consent/callback",
-                  "JwksUri": "https://mock-data-recipient:9001/jwks",
+                  "RecipientBaseUri": "https://host.docker.internal:9001",
+                  "RevocationUri": "https://host.docker.internal:9001/revocation",
+                  "RedirectUris": "https://host.docker.internal:9001/consent/callback",
+                  "JwksUri": "https://host.docker.internal:9001/jwks",
                   "Scope": "openid profile bank:accounts.basic:read bank:accounts.detail:read bank:transactions:read bank:payees:read bank:regular_payments:read common:customer.basic:read common:customer.detail:read cdr:registration",
                   "StatusId": 1,
                   "Certificates": [
@@ -1259,9 +1259,9 @@
               "LastUpdated": "2021-04-06T11:58:00",
               "Endpoint": {
                 "Version": 1,
-                "PublicBaseUri": "https://mock-data-holder:8000",
-                "ResourceBaseUri": "https://mock-data-holder:8002",
-                "InfoSecBaseUri": "https://mock-data-holder:8001",
+                "PublicBaseUri": "https://host.docker.internal:8000",
+                "ResourceBaseUri": "https://host.docker.internal:8002",
+                "InfoSecBaseUri": "https://host.docker.internal:8001",
                 "ExtensionBaseUri": "",
                 "WebsiteUri": "https://bank1/"
               },
